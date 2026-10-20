@@ -3,12 +3,155 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Privacy Policy — Reveno</title>
-<meta name="title-en" content="Privacy Policy — Reveno">
-<meta name="title-ru" content="Политика конфиденциальности — Reveno">
-<meta name="description" content="Reveno does not collect your data. Everything stays on your device.">
-<link rel="stylesheet" href="style.css">
-<script src="lang.js"></script>
+<title>Privacy Policy — Renevo</title>
+<meta name="title-en" content="Privacy Policy — Renevo">
+<meta name="title-ru" content="Политика конфиденциальности — Renevo">
+<meta name="description" content="Renevo does not collect your data. Everything stays on your device.">
+<style>
+/* Renevo:浅色/深色自适应,手机优先。本页自带样式,不依赖外部文件。 */
+:root {
+  --bg: #f2f5f3;
+  --surface: #ffffff;
+  --fg: #14201c;
+  --muted: #5b6b65;
+  --line: #d3dcd8;
+  --accent: #0e7c66;
+  --accent-soft: #d6efe8;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1412;
+    --surface: #17211e;
+    --fg: #e6efeb;
+    --muted: #93a59e;
+    --line: #2b3a35;
+    --accent: #3dd9b0;
+    --accent-soft: #14382f;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0 20px 80px;
+  background: var(--bg);
+  color: var(--fg);
+  font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+.wrap { max-width: 720px; margin: 0 auto; }
+header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 0 24px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #16a58b, #0a5545);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.mark svg { width: 26px; height: 26px; }
+header h1 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+header .sub { color: var(--muted); font-size: 14px; margin: 2px 0 0; }
+h2 { font-size: 22px; margin: 40px 0 12px; letter-spacing: -0.01em; }
+h2:first-of-type { margin-top: 0; }
+h3 { font-size: 17px; margin: 28px 0 8px; }
+p, li { color: var(--fg); }
+.lede { font-size: 18px; color: var(--muted); }
+.meta { color: var(--muted); font-size: 14px; margin: 0 0 32px; }
+ul, ol { padding-left: 22px; }
+li { margin: 6px 0; }
+a { color: var(--accent); }
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 20px 0;
+}
+.card h3 { margin-top: 0; }
+.card p:last-child, .card ul:last-child { margin-bottom: 0; }
+.highlight {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 10px 10px 0;
+  padding: 14px 18px;
+  margin: 24px 0;
+}
+.highlight p { margin: 0; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; margin: 20px 0; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  font-weight: 600;
+}
+.scroll { overflow-x: auto; }
+footer {
+  margin-top: 56px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 14px;
+}
+footer a { color: var(--muted); }
+/* 语言切换:默认英文可见(没有 JS 时也能读),下面的脚本按语言代码切换 */
+[data-lang="ru"] { display: none; }
+html.lang-ru [data-lang="ru"] { display: revert; }
+html.lang-ru [data-lang="en"] { display: none; }
+</style>
+<script>
+/* 语言切换:?lang=ru 或 ?lang=en;没有参数时按浏览器语言,默认英文。
+   在 <head> 里同步执行,避免切换时闪烁。 */
+(function () {
+  var supported = ["en", "ru"];
+
+  function requested() {
+    var match = /[?&]lang=([a-zA-Z-]+)/.exec(location.search) ||
+                /^#(?:lang=)?([a-zA-Z-]+)$/.exec(location.hash);
+    return match ? match[1] : null;
+  }
+
+  function normalize(code) {
+    if (!code) return null;
+    code = code.toLowerCase().split("-")[0];
+    return supported.indexOf(code) >= 0 ? code : null;
+  }
+
+  var lang = normalize(requested());
+  if (!lang) {
+    var list = navigator.languages || [navigator.language];
+    for (var i = 0; i < list.length && !lang; i++) lang = normalize(list[i]);
+  }
+  if (!lang) lang = "en";
+
+  var root = document.documentElement;
+  root.setAttribute("lang", lang);
+  root.className = (root.className || "").replace(/\blang-\w+\b/g, "").trim() + " lang-" + lang;
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var title = document.querySelector('meta[name="title-' + lang + '"]');
+    if (title) document.title = title.getAttribute("content");
+
+    var other = lang === "ru" ? "en" : "ru";
+    var links = document.querySelectorAll("[data-lang-switch]");
+    for (var i = 0; i < links.length; i++) {
+      links[i].setAttribute("href", location.pathname + "?lang=" + other);
+    }
+  });
+})();
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -21,16 +164,9 @@
     </svg>
   </div>
   <div>
-    <h1>Reveno</h1>
+    <h1>Renevo</h1>
     <p class="sub"><span data-lang="en">Privacy Policy</span><span data-lang="ru">Политика конфиденциальности</span></p>
   </div>
-  <nav>
-    <a href="index.html"><span data-lang="en">Home</span><span data-lang="ru">Главная</span></a>
-    <a href="privacy.html" aria-current="page"><span data-lang="en">Privacy</span><span data-lang="ru">Конфиденциальность</span></a>
-    <a href="terms.html"><span data-lang="en">Terms</span><span data-lang="ru">Условия</span></a>
-    <a href="support.html"><span data-lang="en">Support</span><span data-lang="ru">Поддержка</span></a>
-    <a href="?lang=ru" data-lang-switch><span data-lang="en">Русский</span><span data-lang="ru">English</span></a>
-  </nav>
 </header>
 
 <!-- ===================== English ===================== -->
@@ -38,14 +174,14 @@
 
 <p class="meta">Last updated: 20 October 2026</p>
 
-<p class="lede">Reveno does not collect, transmit, or sell your personal data. Everything you enter stays on your device.</p>
+<p class="lede">Renevo does not collect, transmit, or sell your personal data. Everything you enter stays on your device.</p>
 
 <div class="highlight">
   <p><strong>In short:</strong> no account, no analytics, no advertising, no tracking. The app makes no network requests of its own. iCloud sync is optional, turned off by default, and uses your own iCloud account, which we cannot access.</p>
 </div>
 
 <h2>Who we are</h2>
-<p>Reveno (“the app”) is developed and published by QUNATUMLEAP INNOVATION INTERNATIONAL LTD (“we”, “us”). This policy explains what the app does with information on your device. If you have questions, contact us at <a href="mailto:qlinnovation@outlook.com">qlinnovation@outlook.com</a>.</p>
+<p>Renevo (“the app”) is developed and published by QUNATUMLEAP INNOVATION INTERNATIONAL LTD (“we”, “us”). This policy explains what the app does with information on your device. If you have questions, contact us at <a href="mailto:qlinnovation@outlook.com">qlinnovation@outlook.com</a>.</p>
 
 <h2>Data we collect</h2>
 <p>We do not collect any data. We operate no servers, no accounts, and no analytics. We never receive your subscriptions, your spending records, your receipt photos, or any identifier associated with you or your device.</p>
@@ -105,7 +241,7 @@
 <p>Questions about this policy: <a href="mailto:qlinnovation@outlook.com">qlinnovation@outlook.com</a></p>
 
 <footer>
-  <p>Reveno · <a href="index.html">Home</a> · <a href="terms.html">Terms of Use</a> · <a href="support.html">Support</a> · <a href="?lang=ru" data-lang-switch>Русская версия</a></p>
+  <p>Renevo · <a href="../">Home</a> · <a href="../terms/">Terms of Use</a> · <a href="../support/">Support</a> · <a href="?lang=ru" data-lang-switch>Русская версия</a></p>
 </footer>
 
 </div>
@@ -115,14 +251,14 @@
 
 <p class="meta">Обновлено: 20 октября 2026 г.</p>
 
-<p class="lede">Reveno не собирает, не передаёт и не продаёт ваши персональные данные. Всё, что вы вводите, остаётся на вашем устройстве.</p>
+<p class="lede">Renevo не собирает, не передаёт и не продаёт ваши персональные данные. Всё, что вы вводите, остаётся на вашем устройстве.</p>
 
 <div class="highlight">
   <p><strong>Коротко:</strong> без аккаунта, без аналитики, без рекламы и без слежки. Приложение не отправляет никаких сетевых запросов. Синхронизация с iCloud необязательна, по умолчанию выключена и использует ваш собственный аккаунт iCloud, к которому у нас нет доступа.</p>
 </div>
 
 <h2>Кто мы</h2>
-<p>Приложение Reveno («приложение») разработано и выпускается QUNATUMLEAP INNOVATION INTERNATIONAL LTD («мы»). Этот документ объясняет, что приложение делает с информацией на вашем устройстве. Вопросы можно направить на <a href="mailto:qlinnovation@outlook.com">qlinnovation@outlook.com</a>.</p>
+<p>Приложение Renevo («приложение») разработано и выпускается QUNATUMLEAP INNOVATION INTERNATIONAL LTD («мы»). Этот документ объясняет, что приложение делает с информацией на вашем устройстве. Вопросы можно направить на <a href="mailto:qlinnovation@outlook.com">qlinnovation@outlook.com</a>.</p>
 
 <h2>Какие данные мы собираем</h2>
 <p>Мы не собираем никаких данных. У нас нет серверов, аккаунтов и аналитики. Мы никогда не получаем ваши подписки, записи о тратах, фотографии чеков или какие-либо идентификаторы, связанные с вами или вашим устройством.</p>
@@ -182,7 +318,7 @@
 <p>Вопросы по этому документу: <a href="mailto:qlinnovation@outlook.com">qlinnovation@outlook.com</a></p>
 
 <footer>
-  <p>Reveno · <a href="index.html">Главная</a> · <a href="terms.html">Условия использования</a> · <a href="support.html">Поддержка</a> · <a href="?lang=en" data-lang-switch>English version</a></p>
+  <p>Renevo · <a href="../">Главная</a> · <a href="../terms/">Условия использования</a> · <a href="../support/">Поддержка</a> · <a href="?lang=en" data-lang-switch>English version</a></p>
 </footer>
 
 </div>
